@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -40,15 +41,17 @@ public class TransferService {
         TransactionRepository transactionRepository = new TransactionRepository();
         List<AccountTransaction> accountTransaction = transactionRepository.findTransactionsByUserId(user.getId());
 
-        System.out.println("👤➕ List User");
-        System.out.println("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖");
-        System.out.printf("%-5s ❕ %-15s ❕ %-15s ❕ %-15s❕ %-15s ❕ %-25s ❕ %-25s ❕%n", "No.", "Source", "Destination", "Amount", "Type", "Ref", "Created At");
-        System.out.println("---------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("👤➕ List Transaction");
+        System.out.println("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖");
+        System.out.printf("%-5s ❕ %-15s ❕ %-15s ❕ %-15s ❕ %-15s ❕ %-40s ❕ %-25s ❕%n", "No.", "Source", "Destination", "Amount", "Type", "Ref", "Created At");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------");
         for (int i = 0; i < accountTransaction.size(); i++) {
             AccountTransaction item = accountTransaction.get(i);
-            System.out.printf("%-5s ❕ %-15s ❕ %-15s ❕ %-15s ❕ %-15s ❕ %-25s ❕ %-25s ❕%n", i + 1, item.getSourceAcc(), item.getDestinationAcc(), item.getBalance(), item.getTranType(), item.getRef(), item.getCreatedAt().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
+            String destination = Objects.equals(item.getDestinationAcc(), "220000000") ? "Withdraw" : item.getDestinationAcc();
+            String source = Objects.equals(item.getSourceAcc(), "110000000") ? "Deposit" : item.getSourceAcc();
+            System.out.printf("%-5s ❕ %-15s ❕ %-15s ❕ %-15s ❕ %-15s ❕ %-40s ❕ %-25s ❕%n", i + 1, source, destination, item.getBalance(), item.getTranType(), item.getRef(), item.getCreatedAt().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
         }
-        System.out.println("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n");
+        System.out.println("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n");
 
         System.out.print("Press enter to continue .... ");
         String option = myObj.nextLine();

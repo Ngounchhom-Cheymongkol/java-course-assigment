@@ -77,7 +77,7 @@ public class AccountService {
             AccountRepository accountRepository = new AccountRepository();
             List<Account> accounts = accountRepository.findAccountsByUserId(user.getId());
 
-            System.out.println("👤➕ List User");
+            System.out.println("👤➕ List Account");
             System.out.println("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖");
             System.out.printf("%-5s ❕ %-15s ❕ %-15s ❕ %-15s ❕ %-25s ❕%n", "No.", "Account No", "Currency", "Balance", "Created At");
             System.out.println("---------------------------------------------------------------------------------------------------");
